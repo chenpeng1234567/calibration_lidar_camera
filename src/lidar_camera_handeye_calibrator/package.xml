@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>lidar_camera_handeye_calibrator</name>
+  <version>0.1.0</version>
+  <description>Trajectory-based hand-eye calibration for non-overlapping LiDAR and camera fields of view.</description>
+  <maintainer email="maintainer@example.com">Autoware Integration</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>builtin_interfaces</depend>
+  <depend>nav_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>tf2_ros</depend>
+
+  <build_depend>eigen</build_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

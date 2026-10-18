@@ -1,0 +1,36 @@
+/**:
+  ros__parameters:
+    # FAST-LIO_SAM in this repository publishes camera_init -> body here.
+    lidar_odometry_topic: /Odometry
+    camera_odometry_topic: /orb_slam3/camera_back/odometry
+    # Collect only while ORB-SLAM3 reports stable tracking. Any transition to false clears the
+    # current segment so poses from different ORB atlas maps can never be mixed.
+    camera_tracking_ok_topic: /orb_slam3/camera_back/tracking_ok
+    require_camera_tracking_ok: true
+
+    # Output X maps points from camera_frame into reference_frame: p_ref = X * p_camera.
+    reference_frame: body
+    camera_frame: camera_back/camera_optical_link
+    output_yaml: /tmp/lidar_camera_handeye_result.yaml
+
+    # corrected_camera_stamp = camera_stamp + camera_time_offset_sec
+    camera_time_offset_sec: 0.0
+    max_sync_error_sec: 0.025
+    max_queue_size: 1000
+
+    # Relative motion is formed between sample i and i + pair_stride.
+    pair_stride: 10
+    min_motion_translation_m: 0.20
+    min_motion_rotation_deg: 3.0
+    # Conjugate rigid-body motions must have the same rotation angle. This rejects SLAM jumps.
+    max_relative_rotation_difference_deg: 2.0
+    min_motion_pairs: 20
+
+    # Keep true for pure monocular ORB-SLAM3. The result is metres per ORB unit.
+    # Set false for a verified metric stereo or visual-inertial camera trajectory.
+    estimate_camera_scale: true
+
+    # The supplied wrapper publishes Twc and FAST-LIO publishes Twb, so both are false.
+    # These switches exist for third-party wrappers that publish Tcw or inverse odometry.
+    invert_lidar_pose: false
+    invert_camera_pose: false
